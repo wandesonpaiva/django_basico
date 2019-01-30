@@ -1,7 +1,7 @@
-*.pyc
-*~
+*.idea
+*pyc
 __pycache__
-myenv
-db.sqlite3
-/static
+.sqlite3
 DS_Store
+media
+.env
