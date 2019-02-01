@@ -1,28 +1,37 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Clientes</h1>
-    {% if user.is_authenticated %}
-        <p>Olá {{ user.username }}  <a href="{% url 'logout' %}">Logout</a></p>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-    <ul>
-    {% for person in persons %}
-        <li>
-            <a href="{% url 'person_update' person.id %}">{{ person.first_name }}</a>
-            <a href="{% url 'person_delete' person.id %}">Deletar</a>
-        </li>
-    {% endfor %}
-    </ul>
+{% extends 'base.html' %}
 
-    <a href="{% url 'person_new' %}">Cadastrar</a>
-</body>
-</html>
+{% block title %}Lista de clientes{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <h1>Clientes</h1>
+        <ul class="list-group" >
+        {% for person in persons %}
+            <li class="list-group-item" >
+                <a href="{% url 'person_update' person.id %}">{{ person.first_name }}</a>
+                <a href="{% url 'person_delete' person.id %}" class="btn btn-warning" >Deletar</a>
+            </li>
+        {% endfor %}
+        </ul>
+        <br>
+        <a href="{% url 'person_new' %}" class="btn btn-info" >Cadastrar</a>
+
+    </div>
+    <div class="col">
+        {% if user.is_authenticated %}
+            <p>Olá {{ user.username }}  <a href="{% url 'logout' %}">Logout</a></p>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
